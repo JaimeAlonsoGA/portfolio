@@ -5,11 +5,11 @@ const Contact = ({ setShowContact }) => {
         <>
             <div className="fixed inset-0 flex items-center justify-center z-50">
                 <div className="bg-white p-2 rounded-lg shadow-lg w-1/2">
-                    <div className="w-full h-2 bg-gradient-to-r from-Green to-Plat rounded-md"></div>
+                    <div className="w-full h-2 bg-gradient-to-r from-Green to-Red via-Plat rounded-md"></div>
                     <div className="flex flex-row justify-between m-4">
-                        <h1 className="text-gray-500">CONTACT INFORMATION</h1>
-                        <div className="float-right hover:bg-gradient-to-r hover:from-Green hover:to-Plat w-6 h-6 flex items-center justify-center rounded-xl">
-                            <button onClick={() => setShowContact(false)} className="bg-white w-5 h-5 rounded-xl"><TiTick size={20} color="green" /></button>
+                        <h1 className="text-gray-300">Contact</h1>
+                        <div className="float-right hover:bg-gradient-to-r hover:from-Red hover:to-Yellow w-6 h-6 flex items-center justify-center rounded-xl">
+                            <button onClick={() => setShowContact(false)} className="bg-white w-5 h-5 rounded-xl"><TiTick size={20} color="red" /></button>
                         </div>
                     </div>
                     <div className="text-center flex flex-col m-4">
