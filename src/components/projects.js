@@ -16,6 +16,7 @@ import { SiGooglechrome } from "react-icons/si";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { FaItchIo } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import { MdHome } from "react-icons/md";
 
 import alchimixIcon from '../assets/projects/alchimixIcon.png';
 import biovisu from '../assets/projects/biovisu.jpg';
@@ -89,7 +90,7 @@ const Projects = ({ setShowProjects }) => {
                             <p className="text-gray-500 shadow-md rounded p-2">{hoverProject}</p>
                         </div>
                         <div className="hover:bg-gradient-to-r hover:from-Red hover:to-Yellow w-6 h-6 flex items-center justify-center rounded-xl">
-                            <button onClick={() => setShowProjects(false)} className="bg-white w-5 h-5 rounded-xl"><TiTick size={20} color="red" /></button>
+                            <button onClick={() => setShowProjects(false)} className="bg-white w-5 h-5 rounded-xl"><MdHome size={20} color="Red" /></button>
                         </div>
                     </div>
                     {isLgScreen && <div className="mt- 20 flex justify-center items-center">
@@ -129,7 +130,7 @@ const ProjectsContainer = ({ setHoverProject }) => {
             <Marquee velocity={5} autoFill={true} gradient={true} pauseOnClick={true}>
                 <div className="flex text-gray-500 my-0.25 items-center">
                     {projects.map((project) => <ProjectInfoMarquee title={project.title} image={project.image} alt={project.alt} setHoverProject={setHoverProject}
-                        group={project.group} platform={project.platform} rol={project.rol} maintech={project.maintech} sidetech={project.sidetech} />)}
+                        group={project.group} platform={project.platform} rol={project.rol} maintech={project.maintech} sidetech={project.sidetech} link={project.link} />)}
                 </div>
             </Marquee>
         </div>
@@ -137,44 +138,46 @@ const ProjectsContainer = ({ setHoverProject }) => {
 };
 
 
-const ProjectInfoMarquee = ({ setHoverProject, image, alt, title, group, platform, rol, maintech, sidetech }) => {
+const ProjectInfoMarquee = ({ setHoverProject, image, alt, title, group, platform, rol, maintech, sidetech, link }) => {
     const [isHovering, setIsHovering] = useState(false);
 
     return (
-        <div className="hover:bg-gradient-to-r hover:from-Red hover:to-Yellow rounded-lg p-0.5 mx-4 justify-center items-center"
-            onMouseEnter={() => { setHoverProject(alt); setIsHovering(true) }} onMouseLeave={() => { setIsHovering(false); setHoverProject(placeholderProjects) }}>
-            <div className="flex flex-col items-center bg-Plat text-Black rounded-lg">
-                <div className="w-full flex flex-row justify-between items-center">
-                    <div>
-                        <p className="text-gray-500">{title}</p>
+        <a href={link} target="_blank">
+            <div className="hover:bg-gradient-to-r hover:from-Red hover:to-Yellow rounded-lg p-0.5 mx-4 justify-center items-center"
+                onMouseEnter={() => { setHoverProject(alt); setIsHovering(true) }} onMouseLeave={() => { setIsHovering(false); setHoverProject(placeholderProjects) }}>
+                <div className="flex flex-col items-center bg-Plat text-Black rounded-lg">
+                    <div className="w-full flex flex-row justify-between items-center">
+                        <div>
+                            <p className="text-gray-500">{title}</p>
+                        </div>
+                        {isHovering &&
+                            <div className="flex flex-row">
+                                {group === "Alone" ? <MdPerson size={20} color="black" className="mr-2" /> : <RiTeamFill size={20} color="black" className="mr-2" />}
+                                {platform === "Game" ? <IoGameController size={20} color="black" /> : platform === "App" ? <IoPhonePortraitOutline size={20} color="black" /> : <GrPersonalComputer size={20} color="black" />}
+                            </div>
+                        }
                     </div>
-                    {isHovering &&
-                        <div className="flex flex-row">
-                            {group === "Alone" ? <MdPerson size={20} color="black" className="mr-2" /> : <RiTeamFill size={20} color="black" className="mr-2" />}
-                            {platform === "Game" ? <IoGameController size={20} color="black" /> : platform === "App" ? <IoPhonePortraitOutline size={20} color="black" /> : <GrPersonalComputer size={20} color="black" />}
-                        </div>
-                    }
-                </div>
-                <div className="relative rounded-lg bg-Plat text-Plat h-72 w-72 cursor-none">
-                    <img src={image} alt={alt} className="z-20 rounded-lg absolute top-0 left-0 h-full w-full object-cover hover:opacity-5" />
-                    {isHovering && (
-                        <div className="flex flex-col absolute inset-0 flex items-center justify-center">
-                            <img src={maintech} alt="Main technology" className="w-24 h-24 mt-2" />
-                            <div className="flex flex-col">
-                                {rol.map((rol) =>
-                                    <div className="mt-4 z-10 text-center bg-gradient-to-r from-Red to-Yellow flex items-center justify-center rounded-lg mx-4 p-0.5">
-                                        <p className="text-Black shadow-md rounded p-2 w-full overflow-auto break-words">{rol}</p>
-                                    </div>
-                                )}
+                    <div className="relative rounded-lg bg-Plat text-Plat h-72 w-72 cursor-none">
+                        <img src={image} alt={alt} className="z-20 rounded-lg absolute top-0 left-0 h-full w-full object-cover hover:opacity-5" />
+                        {isHovering && (
+                            <div className="flex flex-col absolute inset-0 flex items-center justify-center">
+                                <img src={maintech} alt="Main technology" className="w-24 h-24 mt-2" />
+                                <div className="flex flex-col">
+                                    {rol.map((rol) =>
+                                        <div className="mt-4 z-10 text-center bg-gradient-to-r from-Red to-Yellow flex items-center justify-center rounded-lg mx-4 p-0.5">
+                                            <p className="text-Black shadow-md rounded p-2 w-full overflow-auto break-words">{rol}</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex flex-row w-full h-full justify-center items-center mt-4">
+                                    {sidetech.map((tech, index) => <img key={index} src={tech} alt="Side technology" className="h-8 w-8 object-cover mx-4" />)}
+                                </div>
                             </div>
-                            <div className="flex flex-row w-full h-full justify-center items-center mt-4">
-                                {sidetech.map((tech, index) => <img key={index} src={tech} alt="Side technology" className="h-8 w-8 object-cover mx-4" />)}
-                            </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     );
 };
 

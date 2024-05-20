@@ -303,7 +303,7 @@ const softwareData = [
   { Icon: GiDiploma, size: 26, text: "Certificate of Higher Education" },
   { Icon: FaLocationDot, size: 20, text: "Francisco de Vitoria University, Madrid, Spain" },
   { Icon: FaCalendarCheck, size: 20, text: "2023 - 2025" },
-  { Icon: MdOutlineDescription, size: 20, text: "[CARTA RECOMENDACIÓN]" },
+  { Icon: MdOutlineDescription, size: 20, link: "https://www.ufv.es/cetys/grado-superior-en-desarrollo-de-aplicaciones-multiplataforma-dual/" },
 ];
 
 const soundData = [
@@ -311,16 +311,17 @@ const soundData = [
   { Icon: GiDiploma, size: 26, text: "Advanced Diploma" },
   { Icon: FaLocationDot, size: 20, text: "Abbey Road Institute, Amsterdam, Netherlands" },
   { Icon: FaCalendarCheck, size: 20, text: "2021 - 2023" },
-  { Icon: MdOutlineDescription, size: 20, text: "[CARTA RECOMENDACIÓN]" },
+  { Icon: MdOutlineDescription, size: 20, link: "https://abbeyroadinstitute.nl/courses/part-time-diploma-music-production-sound-engineering/curriculum/" },
 ];
 
 
 const softwareText = (
   <code>
-    {softwareData.map(({ Icon, size, text, key }) => (
+    {softwareData.map(({ Icon, size, text, link, key }) => (
       <div className="flex flex-row p-2 items-center">
         <Icon size={size} className='mr-8' key={key} />
         {text}
+        <a href={link} target='_blank'>Curriculum</a>
       </div>
     ))}
   </code>

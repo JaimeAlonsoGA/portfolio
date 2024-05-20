@@ -1,6 +1,8 @@
-import { TiTick } from "react-icons/ti";
-import { useSpring, animated } from '@react-spring/web'
+// import { useSpring, animated } from '@react-spring/web'
 import { useState } from "react";
+
+import { TiTick } from "react-icons/ti";
+import { MdHome } from "react-icons/md";
 
 // import atom from '../assets/icons/atom.png';
 // import eclipse from '../assets/icons/Eclipse IDE.png';
@@ -45,30 +47,30 @@ import cubase from '../assets/icons/cubase.png';
 const Tools = ({ setShowTools }) => {
     const [hoverTool, setHoverTool] = useState('My eveyday tools!');
 
-    const props = useSpring({
-        backgroundColor: hoverTool ? 'linear-gradient(to right, red, yellow)' : 'white',
-        config: { duration: 1000 },
-        reset: true,
-        reverse: true,
-        delay: 200,
-        onRest: () => setHoverTool("My eveyday tools!")
-    })
+    // const props = useSpring({
+    //     backgroundColor: hoverTool ? 'linear-gradient(to right, red, yellow)' : 'white',
+    //     config: { duration: 1000 },
+    //     reset: true,
+    //     reverse: true,
+    //     delay: 200,
+    //     onRest: () => setHoverTool("My eveyday tools!")
+    // })
 
     // useEffect(() => {
     // }, [setHoverTool])
 
     return (
         <>
-            <div className="w-full h-full fixed inset-y-0 flex items-start justify-center z-50 overflow-auto">
+            <div className="w-full h-full fixed inset-0 flex items-start justify-center z-50 overflow-auto">
                 <div className="bg-white p-2 rounded-lg shadow-md">
                     <div className="w-full h-2 bg-gradient-to-r from-Red to-Yellow rounded-md"></div>
                     <div className="flex flex-row justify-between m-4 items-center">
                         <h1 className="text-gray-500"></h1>
-                        <animated.div style={props} className="text-center float-right hover:bg-gradient-to-r hover:from-Red hover:to-Yellow flex items-center justify-center rounded-lg mx-4 p-0.5">
+                        <div className="text-center float-right hover:bg-gradient-to-r hover:from-Red hover:to-Yellow flex items-center justify-center rounded-lg mx-4 p-0.5">
                             <p className="text-gray-500 shadow-md rounded p-2">{hoverTool}</p>
-                        </animated.div>
+                        </div>
                         <div className="float-right hover:bg-gradient-to-r hover:from-Red hover:to-Yellow w-6 h-6 flex items-center justify-center rounded-xl">
-                            <button onClick={() => setShowTools(false)} className="bg-white w-5 h-5 rounded-xl"><TiTick size={20} color="red" /></button>
+                            <button onClick={() => setShowTools(false)} className="bg-white w-5 h-5 rounded-xl"><MdHome size={20} color="Red" /></button>
                         </div>
                     </div>
                     <div className="m-4">
@@ -90,7 +92,7 @@ const ToolSection = ({ section, setHoverTool, sectionType }) => {
         <div className="flex flex-row justify-between border-2 border-Gray rounded-lg shadow-md p-2 text-gray-500 my-4 items-center">
             <div>
                 {section.map((tool) => <ToolIcon image={tool.image} alt={tool.alt} setHoverTool={setHoverTool} />)}
-            </div>  
+            </div>
             <div className="text-center flex flex-col m-4">
                 <code className="text-gray-300 text-2xl">{sectionType}</code>
             </div>
