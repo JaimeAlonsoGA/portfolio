@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
 import { TiTick } from "react-icons/ti";
 //Alone?
@@ -44,17 +45,20 @@ import firebase from '../assets/icons/Firebase.png';
 
 const placeholderProjects = "...";
 
+
 const Projects = ({ setShowProjects }) => {
     const [hoverProject, setHoverProject] = useState('My projects!');
     const [selectedProjects, setSelectedProjects] = useState(projects);
+
+    const isLgScreen = useMediaQuery({ query: '(min-width: 1024px)' });
 
     // useEffect(() => {
     //     console.log(selectedProjects);
     // }, [selectedProjects]);
 
-    // useEffect(() => {  
-    //     console.log(hoverProject);
-    // }, [hoverProject]);
+    useEffect(() => {
+        console.log(isLgScreen);
+    }, []);
 
     return (
         <>
@@ -62,13 +66,14 @@ const Projects = ({ setShowProjects }) => {
                 <div className="bg-white p-2 rounded-lg shadow-lg w-full h-full">
                     <div className="w-full h-2 bg-gradient-to-r from-Red to-Yellow rounded-md"></div>
                     <div className="flex flex-row justify-between m-4 items-center">
-                        <div className="flex flex-row">
+                        {isLgScreen && <div className="flex flex-row">
                             <HeaderIcon icon={<MdPerson />} setHoverProject={setHoverProject} text="Solo" setSelectedProjects={setSelectedProjects} selectedProjects={selectedProjects} />
                             <HeaderIcon icon={<RiTeamFill />} setHoverProject={setHoverProject} text="Group" setSelectedProjects={setSelectedProjects} selectedProjects={selectedProjects} />
                             <HeaderIcon icon={<IoGameController />} setHoverProject={setHoverProject} text="Video game" setSelectedProjects={setSelectedProjects} selectedProjects={selectedProjects} />
                             <HeaderIcon icon={<IoPhonePortraitOutline />} setHoverProject={setHoverProject} text="Phone Application" setSelectedProjects={setSelectedProjects} selectedProjects={selectedProjects} />
                             <HeaderIcon icon={<GrPersonalComputer />} setHoverProject={setHoverProject} text="Webiste" setSelectedProjects={setSelectedProjects} selectedProjects={selectedProjects} />
-                        </div>
+                        </div>}
+                        {!isLgScreen && <div></div>}
                         <div className="absolute left-0 right-0 mx-auto text-center hover:bg-gradient-to-r hover:from-Red hover:to-Yellow flex items-center justify-center rounded-lg p-0.5" style={{ width: 'fit-content' }}>
                             <p className="text-gray-500 shadow-md rounded p-2">{hoverProject}</p>
                         </div>
@@ -76,27 +81,40 @@ const Projects = ({ setShowProjects }) => {
                             <button onClick={() => setShowProjects(false)} className="bg-white w-5 h-5 rounded-xl"><TiTick size={20} color="red" /></button>
                         </div>
                     </div>
-                    <div className="mt- 20 flex justify-center items-center">
+                    {isLgScreen && <div className="mt- 20 flex justify-center items-center">
                         <div className="justify-center">
                             <ProjectsContainer setHoverProject={setHoverProject} selectedProjects={selectedProjects} />
                         </div>
-                    </div>
-                    <div className="flex flex-row justify-center items-center">
+                    </div>}
+                    {!isLgScreen && <MobileProjectsContainer setHoverProject={setHoverProject} selectedProjects={selectedProjects} />}
+                    {isLgScreen && <div className="flex flex-row justify-center items-center">
                         <div className="fixed bottom-10 px-4 justify-center">
                             <ProjectsRow setHoverProject={setHoverProject} selectedProjects={selectedProjects} />
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
             <div className="absolute inset-0 bg-black opacity-20"></div>
         </>
     );
-}
+};
+
+
+const MobileProjectsContainer = ({ setHoverProject, selectedProjects }) => {
+    return (
+        <div className="flex flex-col container mx-auto px-1 my-24 overflow-y-auto">
+            <div className="flex text-gray-500 my-0.25 items-center">
+                {selectedProjects.map((project) => <MobileProjectInfoMarquee title={project.title} image={project.image} alt={project.alt} setHoverProject={setHoverProject}
+                    group={project.group} platform={project.platform} rol={project.rol} maintech={project.maintech} sidetech={project.sidetech} link={project.link} />)}
+            </div>
+        </div>
+    );
+};
 
 
 const ProjectsContainer = ({ setHoverProject, selectedProjects }) => {
     return (
-        <div className="container mx-auto px-1  my-24">
+        <div className="container mx-auto px-1 my-24 overflow-x-auto">
             <Marquee velocity={5} autoFill={true} gradient={true} pauseOnClick={true}>
                 <div className="flex text-gray-500 my-0.25 items-center">
                     {selectedProjects.map((project) => <ProjectInfoMarquee title={project.title} image={project.image} alt={project.alt} setHoverProject={setHoverProject}
@@ -105,7 +123,8 @@ const ProjectsContainer = ({ setHoverProject, selectedProjects }) => {
             </Marquee>
         </div>
     );
-}
+};
+
 
 const ProjectInfoMarquee = ({ setHoverProject, image, alt, title, group, platform, rol, maintech, sidetech }) => {
     const [isHovering, setIsHovering] = useState(false);
@@ -146,7 +165,53 @@ const ProjectInfoMarquee = ({ setHoverProject, image, alt, title, group, platfor
             </div>
         </div>
     );
-}
+};
+
+
+const MobileProjectInfoMarquee = ({ setHoverProject, image, alt, title, group, platform, rol, maintech, sidetech, link }) => {
+    const [isHovering, setIsHovering] = useState(false);
+
+    return (
+        <div className="hover:bg-gradient-to-r hover:from-Red hover:to-Yellow rounded-lg p-0.5 mx-4 justify-center items-center"
+            onMouseEnter={() => { setHoverProject(alt); setIsHovering(true) }} onMouseLeave={() => { setIsHovering(false); setHoverProject(placeholderProjects) }}>
+            <div className="flex flex-col items-center bg-Plat text-Black rounded-lg">
+                <div className="w-full flex flex-row justify-between items-center">
+                    <div>
+                        <p className="text-gray-500">{title}</p>
+                    </div>
+                    {isHovering &&
+                        <div className="flex flex-row">
+                            {group === "Alone" ? <MdPerson size={20} color="black" className="mr-2" /> : <RiTeamFill size={20} color="black" className="mr-2" />}
+                            {platform === "Game" ? <IoGameController size={20} color="black" /> : platform === "App" ? <IoPhonePortraitOutline size={20} color="black" /> : <GrPersonalComputer size={20} color="black" />}
+                        </div>
+                    }
+                </div>
+                <div className="relative rounded-lg bg-Plat text-Plat h-72 w-72 cursor-none">
+                    <img src={image} alt={alt} className="z-20 rounded-lg absolute top-0 left-0 h-full w-full object-cover hover:opacity-5" />
+                    {isHovering && (
+                        <div className="flex flex-col absolute inset-0 flex items-center justify-center">
+                            <img src={maintech} alt="Main technology" className="w-24 h-24 mt-2" />
+                            <div className="flex flex-col">
+                                {rol.map((rol) =>
+                                    <div className="mt-4 z-10 text-center bg-gradient-to-r from-Red to-Yellow flex items-center justify-center rounded-lg mx-4 p-0.5">
+                                        <p className="text-Black shadow-md rounded p-2 w-full overflow-auto break-words">{rol}</p>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="flex flex-row w-full h-full justify-center items-center mt-4">
+                                {sidetech.map((tech, index) => <img key={index} src={tech} alt="Side technology" className="h-8 w-8 object-cover mx-4" />)}
+                            </div>
+                        </div>
+                    )}
+                </div>
+                <a href={link} target="_blank" className="p-2 mt-4 border-gray-500 border-2 rounded">
+                    <FaExternalLinkAlt size={18} />
+                </a>
+            </div>
+        </div>
+    );
+};
+
 
 const ProjectsRow = ({ setHoverProject, selectedProjects }) => {
     return (

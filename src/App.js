@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 // import { useTrail, config, animated, useSpring } from '@react-spring/web'
 import Marquee from 'react-fast-marquee';
 import Contact from './components/contact';
+import { useMediaQuery } from 'react-responsive'
 
 import { FaCalendarCheck } from "react-icons/fa";
 import { GiGraduateCap } from "react-icons/gi";
@@ -30,6 +31,7 @@ import Projects from './components/projects';
 const plantImages = [p4, p5, p6, p7];
 
 
+
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [plantImg, setPlantImg] = useState(plantImages[currentIndex]);
@@ -45,81 +47,81 @@ function App() {
   const [projectsHover, setProjectsHover] = useState(false);
   const [toolsHover, setToolsHover] = useState(false);
   const [contactHover, setContactHover] = useState(false);
+  const [pressed, setPressed] = useState({
+    softwareDeveloper: false,
+    soundEngineer: false
+  })
 
+  const isSmScreen = useMediaQuery({ query: '(min-width: 640px)' });
+  const isMdScreen = useMediaQuery({ query: '(min-width: 768px)' });
+  const isLgScreen = useMediaQuery({ query: '(min-width: 1024px)' });
+  const isXlScreen = useMediaQuery({ query: '(min-width: 1280px)' });
+  const is2xlScreen = useMediaQuery({ query: '(min-width: 1536px)' });
 
   useEffect(() => {
     if (currentIndex === plantImages.length) {
       setCompleted(true);
       // setShowContact(true);
     }
-    console.log(currentIndex);
   }, [currentIndex]);
 
   return (
-    <div className="overflow-y-auto whitespace-nowrap">
-      <Container plantImg={plantImg} setPlantImg={setPlantImg} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} completed={completed}
-        setShowContact={setShowContact} showContact={showContact} showTools={showTools} setShowTools={setShowTools}
-        academicPressed={academicPressed} setAcademicPressed={setAcademicPressed} projectsButtonPressed={projectsButtonPressed} setProjectsButtonPressed={setProjectsButtonPressed}
-        toolsButtonPressed={toolsButtonPressed} setToolsButtonPressed={setToolsButtonPressed} academicHover={academicHover} setAcademicHover={setAcademicHover}
-        projectsHover={projectsHover} setProjectsHover={setProjectsHover} toolsHover={toolsHover} setToolsHover={setToolsHover}
-        showProjects={showProjects} setShowProjects={setShowProjects} contactButtonPressed={contactButtonPressed} setContactButtonPressed={setContactButtonPressed}
-        contactHover={contactHover} setContactHover={setContactHover}
-      />
-      {/* <img src={logo} className="App-logo" alt="logo" /> */}
-    </div>
-  );
-}
-
-
-const Container = ({ plantImg, setPlantImg, currentIndex, setCurrentIndex, completed, showContact, setShowContact,
-  setShowTools, showTools, academicPressed, setAcademicPressed, projectsButtonPressed, setProjectsButtonPressed,
-  toolsButtonPressed, setToolsButtonPressed, academicHover, setAcademicHover, projectsHover, setProjectsHover, toolsHover, setToolsHover,
-  showProjects, setShowProjects, contactButtonPressed, setContactButtonPressed, contactHover, setContactHover }) => {
-  return (
     <div>
-      <div className='mb-10 text-center'>
-        <h1 className="mt-4 text-slate-500 text-4xl">Jaime Alonso</h1>
+      <h1 className="mt-6 text-center text-gray-400 text-2xl lg:text-4xl">Jaime Alonso</h1>
+      <div className='flex justify-center my-6'>
+        <TaskPanel academicPressed={academicPressed} projectsButtonPressed={projectsButtonPressed} toolsButtonPressed={toolsButtonPressed}
+          setAcademicHover={setAcademicHover} setProjectsHover={setProjectsHover} setToolsHover={setToolsHover} completed={completed} contactButtonPressed={contactButtonPressed}
+          setContactHover={setContactHover} />
+        {completed && <ContactButton setShowContact={setShowContact} setContactButtonPressed={setContactButtonPressed} contactHover={contactHover} />}
       </div>
-      <TaskPanel academicPressed={academicPressed} projectsButtonPressed={projectsButtonPressed} toolsButtonPressed={toolsButtonPressed}
-        setAcademicHover={setAcademicHover} setProjectsHover={setProjectsHover} setToolsHover={setToolsHover} completed={completed} contactButtonPressed={contactButtonPressed}
-        setContactHover={setContactHover} />
-      {completed && <ContactButton setShowContact={setShowContact} setContactButtonPressed={setContactButtonPressed} contactHover={contactHover} />}
-      <ContentBox setPlantImg={setPlantImg} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} academicPressed={academicPressed} setAcademicPressed={setAcademicPressed} academicHover={academicHover} />
+      <ContentBox setPlantImg={setPlantImg} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} academicPressed={academicPressed} setAcademicPressed={setAcademicPressed} academicHover={academicHover} setPressed={setPressed} pressed={pressed} />
       {showContact && <Contact setShowContact={setShowContact} />}
       {showTools && <Tools setShowTools={setShowTools} />}
       {showProjects && <Projects setShowProjects={setShowProjects} />}
-      <div className='flex justify-center'>
-        <div className='fixed bottom-44 flex justify-between items-center'>
-          <ProjectsButton setPlantImg={setPlantImg} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} projectsButtonPressed={projectsButtonPressed} setProjectsButtonPressed={setProjectsButtonPressed} projectsHover={projectsHover} setShowProjects={setShowProjects} />
-          <Plant plantImg={plantImg} />
-          <ToolsButton setPlantImg={setPlantImg} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} setShowTools={setShowTools} toolsButtonPressed={toolsButtonPressed} setToolsButtonPressed={setToolsButtonPressed} toolsHover={toolsHover} />
-        </div>
-      </div>
-      <div className='fixed bottom-0 w-full flex flex-col items-center content-center'>
-        <LinksBanner completed={completed} />
+      {(!pressed.softwareDeveloper && !pressed.soundEngineer) && <div className='flex flex-row mt-6'>
+        <ProjectsButton setPlantImg={setPlantImg} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} projectsButtonPressed={projectsButtonPressed} setProjectsButtonPressed={setProjectsButtonPressed} projectsHover={projectsHover} setShowProjects={setShowProjects} isSmScreen={isSmScreen} />
+        <ToolsButton setPlantImg={setPlantImg} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} setShowTools={setShowTools} toolsButtonPressed={toolsButtonPressed} setToolsButtonPressed={setToolsButtonPressed} toolsHover={toolsHover} isSmScreen={isSmScreen} />
+      </div>}
+      {(!pressed.softwareDeveloper && !pressed.soundEngineer) && <Plant plantImg={plantImg} />}
+      <div className='w-full absolute bottom-0'>
+        <LinksBanner completed={completed} isMdScreen={isMdScreen} isLgScreen={isLgScreen} />
       </div>
     </div>
   );
 }
 
 
-const ContentBox = ({ setPlantImg, currentIndex, setCurrentIndex, academicPressed, setAcademicPressed, academicHover }) => {
+const ContentBox = ({ setPlantImg, currentIndex, setCurrentIndex, academicPressed, setAcademicPressed, academicHover, pressed, setPressed }) => {
+
   const [soundPressed, setSoundPressed] = useState(false);
   const [softwarePressed, setSoftwarePressed] = useState(false);
 
   useEffect(() => {
-    setCurrentIndex(currentIndex + 1);
-    setPlantImg(plantImages[currentIndex]);
+    if (academicPressed) {
+      setPlantImg(plantImages[currentIndex]);
+      setCurrentIndex(currentIndex + 1);
+    }
   }, [academicPressed]);
+
+  const toggleSoftwarePressed = () => {
+    setSoftwarePressed(prevState => {
+      if (!prevState) {
+        setSoftwarePressed(true);
+      }
+    });
+  }
+
+  const toggleSoundPressed = () => {
+    setSoundPressed(prevState => {
+      if (!prevState) {
+        setSoundPressed(true);
+      }
+    });
+  }
 
   useEffect(() => {
     if (soundPressed && softwarePressed) setAcademicPressed(true);
   }, [softwarePressed, soundPressed]);
-
-  const [pressed, setPressed] = useState({
-    softwareDeveloper: false,
-    soundEngineer: false
-  })
 
   const handlePress = (name) => {
     setPressed(prevState => ({
@@ -130,46 +132,45 @@ const ContentBox = ({ setPlantImg, currentIndex, setCurrentIndex, academicPresse
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <div className={academicHover ? 'border-2 border-Black rounded-xl' : ''}>
-        <div className={soundPressed && softwarePressed ? "flex text-center bg-gradient-to-r from-Green to-Green via-Plat text-Black p-2 mb-4 rounded-xl" :
-          (soundPressed ? "flex text-center bg-gradient-to-r from-Red to-Green via-Plat text-Black p-2 mb-4 rounded-xl" :
-            (softwarePressed ? "flex text-center bg-gradient-to-r from-Green to-Red via-Plat text-Black p-2 mb-4 rounded-xl" :
-              "flex text-center bg-gradient-to-r from-Red to-Yellow via-Plat text-Black p-2 mb-4 rounded-xl"))}>
-          <div className='w-1/2'>
-            <button onClick={() => { handlePress('softwareDeveloper'); setSoftwarePressed(true) }} className={pressed.softwareDeveloper ? "text-Black font-bold p-1" : "text-gray-500 font-medium p-1"}>Software Developer</button>
-          </div>
-          <div className='w-1/2'>
-            <button onClick={() => { handlePress('soundEngineer'); setSoundPressed(true) }} className={pressed.soundEngineer ? "text-Black font-bold p-1" : "text-gray-500 font-medium p-1"} >Sound Engineer</button>
-          </div>
+    <>
+      <div className="flex flex-row items-center justify-center">
+        <div className={academicHover ? 'border-2 border-Black rounded-xl w-full' : 'w-full'}>
+          <div className={soundPressed && softwarePressed ? "flex text-center bg-gradient-to-r from-Green to-Green via-Plat text-Black p-2 rounded-xl" :
+            (soundPressed ? "flex text-center bg-gradient-to-r from-Red to-Green via-Plat text-Black p-2 rounded-xl" :
+              (softwarePressed ? "flex text-center bg-gradient-to-r from-Green to-Red via-Plat text-Black p-2 rounded-xl" :
+                "flex text-center bg-gradient-to-r from-Red to-Yellow via-Plat text-Black p-2 rounded-xl"))}>
+            <div className='w-1/2'>
+              <button onClick={() => { handlePress('softwareDeveloper'); toggleSoftwarePressed() }} className={pressed.softwareDeveloper ? "text-Black font-bold p-1" : "text-gray-500 font-medium p-1"}>Software Developer</button>
+            </div>
+            <div className='w-1/2'>
+              <button onClick={() => { handlePress('soundEngineer'); toggleSoundPressed() }} className={pressed.soundEngineer ? "text-Black font-bold p-1" : "text-gray-500 font-medium p-1"} >Sound Engineer</button>
+            </div>
+          </div >
         </div>
-        {(pressed.softwareDeveloper || pressed.soundEngineer) &&
-          <div className="bg-Gray p-2 pr-72 rounded-xl">
-            <p>{pressed.softwareDeveloper ? softwareText : soundText}</p>
-          </div>
-        }
-        <p className='text-Plat'>............................................................................................................................................................................................................................</p>
-      </div >
-    </div>
+      </div>
+      {(pressed.softwareDeveloper || pressed.soundEngineer) &&
+        <div className="bg-Gray rounded-xl mt-6">
+          <p>{pressed.softwareDeveloper ? softwareText : soundText}</p>
+        </div>
+      }
+    </>
   );
 }
 
 
 const TaskPanel = ({ academicPressed, projectsButtonPressed, toolsButtonPressed, setAcademicHover, setProjectsHover, setToolsHover, completed, contactButtonPressed, setContactHover }) => {
   return (
-      <div className='fixed top-20 right-20'>
-        <div className="p-6 max-w-sm mx-auto bg-white rounded-lg shadow-md flex flex-col items-center space-x-4">
-          <h1 className='text-gray-300'>What to see</h1>
-          <Task task="Academic" hover={setAcademicHover} boolean={academicPressed} />
-          <Task task="Projects" hover={setProjectsHover} boolean={projectsButtonPressed} />
-          <Task task="Tools" hover={setToolsHover} boolean={toolsButtonPressed} />
-          <div className={completed ? 'flex flex-row items-center rounded-lg p-1 cursor-help' : 'flex flex-row items-center rounded-lg p-1 cursor-not-allowed'}>
-            {contactButtonPressed ? <TiTick size={20} color="green" /> : (completed ? <FaUnlock size={12} color='green' className='mr-2' /> : <FaLock size={12} className='mr-2' />)}
-            <p onMouseEnter={() => setContactHover(true)}
-              onMouseLeave={() => setContactHover(false)}>Contact</p>
-          </div>
-        </div>
+    <div className="py-2 bg-white rounded-lg shadow-md flex flex-col items-center px-8 sm:px-16 md:px-32 lg:px-48">
+      <h1 className='text-gray-300'>What to see</h1>
+      <Task task="Academic" hover={setAcademicHover} boolean={academicPressed} />
+      <Task task="Projects" hover={setProjectsHover} boolean={projectsButtonPressed} />
+      <Task task="Tools" hover={setToolsHover} boolean={toolsButtonPressed} />
+      <div className={completed ? 'flex flex-row items-center rounded-lg p-0.5 cursor-help' : 'flex flex-row items-center rounded-lg p-0.5 cursor-not-allowed'}>
+        {contactButtonPressed ? <TiTick size={20} color="green" /> : (completed ? <FaUnlock size={12} color='green' className='mr-2' /> : <FaLock size={12} className='mr-2' />)}
+        <p onMouseEnter={() => setContactHover(true)}
+          onMouseLeave={() => setContactHover(false)}>Contact</p>
       </div>
+    </div>
   );
 };
 
@@ -181,22 +182,38 @@ const Task = ({ task, hover, boolean }) => {
         onMouseLeave={() => hover(false)}>{task}</p>
     </div>
   )
-}
+};
+
+
+const ContactButton = ({ setShowContact, setContactButtonPressed, contactHover }) => {
+  return (
+    <button onClick={() => { setShowContact(true); setContactButtonPressed(true) }}
+      className="text-center border border-Gray shadow-md bg-gradient-to-r from-Green to-Red flex items-center justify-center rounded-lg ml-4 p-0.5">
+      <div className={contactHover ? 'border-2 border-Black rounded-xl' : ''}>
+        <div className="bg-Plat text-Black text-center rounded-lg p-4 py-11">
+          <p className='text-bold'>Contact</p>
+          <p className='text-gray-300'>Thank you for your interest!</p>
+        </div>
+      </div>
+    </button>
+
+  );
+};
 
 
 
-const ProjectsButton = ({ setPlantImg, currentIndex, setCurrentIndex, projectsButtonPressed, setProjectsButtonPressed, projectsHover, setShowProjects }) => {
+const ProjectsButton = ({ setPlantImg, currentIndex, setCurrentIndex, projectsButtonPressed, setProjectsButtonPressed, projectsHover, setShowProjects, isSmScreen }) => {
   useEffect(() => {
     setCurrentIndex(currentIndex + 1);
     setPlantImg(plantImages[currentIndex]);
   }, [projectsButtonPressed]);
 
   return (
-    <button onClick={() => { setProjectsButtonPressed(true); setShowProjects(true) }}>
-      <div className="ml-60">
+    <div className='w-full flex justify-center'>
+      <button onClick={() => { setProjectsButtonPressed(true); setShowProjects(true) }}>
         <div className={projectsHover ? 'border-2 border-Black rounded-xl' : ''}>
-          <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
-            <div className="flex-shrink-0">
+          <div className="p-6 bg-white rounded-xl shadow-md flex items-center">
+            {isSmScreen && <div className="flex-shrink-0">
               <div className="inline-block relative">
                 <div className="overflow-hidden rounded-full">
                   <div className={projectsButtonPressed ? "w-full h-full bg-Green p-6" :
@@ -205,31 +222,31 @@ const ProjectsButton = ({ setPlantImg, currentIndex, setCurrentIndex, projectsBu
                 </div>
                 <div className="absolute inset-2 bg-white rounded-full"></div>
               </div>
-            </div>
+            </div>}
             <div>
               <div className="text-xl font-medium text-black">Projects</div>
-              <p className="text-gray-300">Multidisciplinary projects</p>
+              {isSmScreen && <p className="text-gray-300 px-4">Multidisciplinary projects</p>}
             </div>
           </div>
         </div>
-      </div>
-    </button>
+      </button>
+    </div>
   );
 };
 
 
-const ToolsButton = ({ setPlantImg, currentIndex, setCurrentIndex, setShowTools, toolsButtonPressed, setToolsButtonPressed, toolsHover }) => {
+const ToolsButton = ({ setPlantImg, currentIndex, setCurrentIndex, setShowTools, toolsButtonPressed, setToolsButtonPressed, toolsHover, isSmScreen }) => {
   useEffect(() => {
     setCurrentIndex(currentIndex + 1);
     setPlantImg(plantImages[currentIndex]);
   }, [toolsButtonPressed]);
 
   return (
-    <button onClick={() => { setToolsButtonPressed(true); setShowTools(true) }}>
-      <div className="float-right mr-60">
+    <div className='w-full flex justify-center'>
+      <button onClick={() => { setToolsButtonPressed(true); setShowTools(true) }} className='float-right'>
         <div className={toolsHover ? 'border-2 border-Black rounded-xl' : ''}>
-          <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
-            <div className="flex-shrink-0">
+          <div className="p-6 bg-white rounded-xl shadow-md flex items-center">
+            {isSmScreen && <div className="flex-shrink-0">
               <div className="inline-block relative">
                 <div className="overflow-hidden rounded-full">
                   <div className={toolsButtonPressed ? "w-full h-full bg-Green p-6" :
@@ -238,23 +255,23 @@ const ToolsButton = ({ setPlantImg, currentIndex, setCurrentIndex, setShowTools,
                 </div>
                 <div className="absolute inset-2 bg-white rounded-full"></div>
               </div>
-            </div>
+            </div>}
             <div>
               <div className="text-xl font-medium text-black">Tools</div>
-              <p className="text-gray-300">My everyday tools!</p>
+              {isSmScreen && <p className="text-gray-300 px-4">My everyday tools!</p>}
             </div>
           </div>
         </div>
-      </div>
-    </button>
+      </button>
+    </div>
   );
 };
 
 
 const Plant = ({ plantImg }) => {
   return (
-    <div>
-      <img src={plantImg} alt="This plant grows" className="object-contain w-64 h-64 mx-24" />
+    <div className='w-full h-full flex justify-center'>
+      <img src={plantImg} alt="This plant grows" className="object-contain w-48 h-48 sm:w-52 sm:h-52" />
     </div>
   );
 };
@@ -269,9 +286,9 @@ const links = [
   { text: "Itch.io", icon: <FaItchIo size={23} />, link: "https://jaime-alonso.itch.io/" },
 ];
 
-const LinksBanner = ({ completed }) => {
+const LinksBanner = ({ completed, isMdScreen, isLgScreen }) => {
   return (
-    <Marquee velocity={5} className="mt-20" autoFill={true} gradient={true} gradientColor={completed ? 'Green' : 'Red'} gradientWidth={600}>
+    <Marquee velocity={5} autoFill={true} gradient={true} gradientColor={completed ? 'Green' : 'Red'} gradientWidth={isMdScreen ? 200 : (isLgScreen ? 250 : 100)}>
       {links.map((link, index) => (
         <Links to={link.link} key={index} icon={link.icon} link={link.link} text={link.text} completed={completed} />
       ))}
@@ -281,13 +298,14 @@ const LinksBanner = ({ completed }) => {
 
 const Links = ({ text, icon, link, completed }) => {
   return (
-    <div className='flex items-center flex-col mx-20 p-2'>
-      <a href={link} target="_blank" rel="noreferrer" className={completed ? "text-Plat bg-LightGreen w-18 h-18 p-4 inline-block hover:bg-Green" :
-        "text-Plat bg-LightRed w-18 h-18 p-4 inline-block hover:bg-Red"}>{icon}</a>
+    <div className='flex items-center flex-col mx-14 sm:mx-16 lg:mx-20'>
+      <a href={link} target="_blank" rel="noreferrer" className={completed ? "text-Plat bg-LightGreen w-18 h-18 p-2 inline-block hover:bg-Green" :
+        "text-Plat bg-LightRed w-18 h-18 p-2 inline-block hover:bg-Red"}>{icon}</a>
       <p className='text-gray-500'>{text}</p>
     </div>
   );
 }
+
 
 
 const softwareData = [
@@ -309,7 +327,7 @@ const soundData = [
 const softwareText = (
   <code>
     {softwareData.map(({ Icon, size, text }) => (
-      <div className="flex flex-row m-2">
+      <div className="flex flex-row p-2">
         <Icon size={size} className='mr-8' />
         {text}
       </div>
@@ -320,29 +338,13 @@ const softwareText = (
 const soundText = (
   <code>
     {soundData.map(({ Icon, size, text }) => (
-      <div className="flex flex-row m-2">
+      <div className="flex flex-row p-2">
         <Icon size={size} className='mr-8' />
         {text}
       </div>
     ))}
   </code>
 );
-
-
-const ContactButton = ({ setShowContact, setContactButtonPressed, contactHover }) => {
-  return (
-    <button onClick={() => { setShowContact(true); setContactButtonPressed(true) }}
-      className="absolute left-12 top-28 text-center border border-Gray shadow-md bg-gradient-to-r from-Green to-Red flex items-center justify-center rounded-lg mx-4 p-0.5">
-      <div className={contactHover ? 'border-2 border-Black rounded-xl' : ''}>
-        <div className="bg-Plat text-Black text-center rounded-lg p-4">
-          <p className='text-bold'>Contact</p>
-          <p className='text-gray-300'>Thank you for your interest!</p>
-        </div>
-      </div>
-    </button>
-
-  );
-}
 
 
 export default App;

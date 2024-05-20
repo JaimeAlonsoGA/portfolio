@@ -59,8 +59,8 @@ const Tools = ({ setShowTools }) => {
 
     return (
         <>
-            <div className="fixed inset-0 flex items-center justify-center z-50">
-                <div className="bg-white p-2 rounded-lg shadow-md w-full h-full">
+            <div className="w-full h-full fixed inset-y-0 flex items-start justify-center z-50 overflow-auto">
+                <div className="bg-white p-2 rounded-lg shadow-md">
                     <div className="w-full h-2 bg-gradient-to-r from-Red to-Yellow rounded-md"></div>
                     <div className="flex flex-row justify-between m-4 items-center">
                         <h1 className="text-gray-500"></h1>
@@ -80,7 +80,7 @@ const Tools = ({ setShowTools }) => {
                     </div>
                 </div>
             </div>
-            <div className="absolute inset-0 bg-black opacity-20"></div>
+            <div className="w-full h-full absolute inset-0 bg-black opacity-20"></div>
         </>
     );
 }
@@ -90,7 +90,7 @@ const ToolSection = ({ section, setHoverTool, sectionType }) => {
         <div className="flex flex-row justify-between border-2 border-Gray rounded-lg shadow-md p-2 text-gray-500 my-4 items-center">
             <div>
                 {section.map((tool) => <ToolIcon image={tool.image} alt={tool.alt} setHoverTool={setHoverTool} />)}
-            </div>
+            </div>  
             <div className="text-center flex flex-col m-4">
                 <code className="text-gray-300 text-2xl">{sectionType}</code>
             </div>
