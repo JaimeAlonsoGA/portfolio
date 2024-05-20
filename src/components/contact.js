@@ -4,7 +4,7 @@ const Contact = ({ setShowContact }) => {
     return (
         <>
             <div className="fixed inset-0 flex items-center justify-center z-50">
-                <div className="bg-white p-2 rounded-lg shadow-lg w-full sm:w-11/12 lg:w-10/12">
+                <div className="bg-white p-2 rounded-lg shadow-lg w-full sm:w-11/12 lg:w-10/12 xl:w-9/12">
                     <div className="w-full h-2 bg-gradient-to-r from-Green to-Red via-Plat rounded-md"></div>
                     <div className="flex flex-row justify-between m-4">
                         <h1 className="text-gray-300">Contact</h1>

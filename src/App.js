@@ -122,7 +122,7 @@ const ContentBox = ({ setPlantImg, currentIndex, setCurrentIndex, academicPresse
 
   return (
     <>
-      <div className="flex flex-row items-center justify-center">
+      <div className="flex flex-row items-center justify-center sm:mx-4">
         <div className={academicHover ? 'border-2 border-Black rounded-xl w-full' : 'w-full'}>
           <div className={soundPressed && softwarePressed ? "flex text-center bg-gradient-to-r from-Green to-Green via-Plat text-Black p-2 rounded-xl" :
             (soundPressed ? "flex text-center bg-gradient-to-r from-Red to-Green via-Plat text-Black p-2 rounded-xl" :
@@ -138,7 +138,7 @@ const ContentBox = ({ setPlantImg, currentIndex, setCurrentIndex, academicPresse
         </div>
       </div>
       {(pressed.softwareDeveloper || pressed.soundEngineer) &&
-        <div className="bg-Gray rounded-xl mt-6">
+        <div className="bg-Gray rounded-xl mt-6 sm:mx-4">
           <p>{pressed.softwareDeveloper ? softwareText : soundText}</p>
         </div>
       }
@@ -185,7 +185,6 @@ const ContactButton = ({ setShowContact, setContactButtonPressed, contactHover }
         </div>
       </div>
     </button>
-
   );
 };
 
@@ -319,7 +318,7 @@ const soundData = [
 const softwareText = (
   <code>
     {softwareData.map(({ Icon, size, text, key }) => (
-      <div className="flex flex-row p-2">
+      <div className="flex flex-row p-2 items-center">
         <Icon size={size} className='mr-8' key={key} />
         {text}
       </div>
@@ -330,7 +329,7 @@ const softwareText = (
 const soundText = (
   <code>
     {soundData.map(({ Icon, size, text, key }) => (
-      <div className="flex flex-row p-2">
+      <div className="flex flex-row p-2 items-center">
         <Icon size={size} className='mr-8' key={key} />
         {text}
       </div>
@@ -344,7 +343,7 @@ const links = [
   { text: "GitHub", icon: <FaGithub size={25} />, link: "https://github.com/JaimeAlonsoGA" },
   { text: "Email", icon: <MdOutlineEmail size={25} />, link: "mailto:alonsog.jaime@gmail.com" },
   { text: "Resume", icon: <GrDocumentPdf size={23} />, link: "https://drive.google.com/file/d/1rc6TNp92qo8FIlQ6-1cn_Zt6SgQQ0T5L/view?usp=sharing" },
-  { text: "Soundcloud", icon: <RiSoundcloudLine size={25} />, link: "https://soundcloud.com/jaime-alonso-360" },
+  { text: "Soundcloud", icon: <RiSoundcloudLine size={25} />, link: "https://soundcloud.com/jaimebigsound" },
   { text: "Itch.io", icon: <FaItchIo size={23} />, link: "https://jaime-alonso.itch.io/" },
 ];
 
