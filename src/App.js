@@ -303,7 +303,7 @@ const softwareData = [
   { Icon: GiDiploma, size: 26, text: "Certificate of Higher Education" },
   { Icon: FaLocationDot, size: 20, text: "Francisco de Vitoria University, Madrid, Spain" },
   { Icon: FaCalendarCheck, size: 20, text: "2023 - 2025" },
-  { Icon: MdOutlineDescription, size: 20, link: "https://www.ufv.es/cetys/grado-superior-en-desarrollo-de-aplicaciones-multiplataforma-dual/" },
+  { Icon: MdOutlineDescription, size: 20, text: "Curriculum", link: "https://www.ufv.es/cetys/grado-superior-en-desarrollo-de-aplicaciones-multiplataforma-dual/" },
 ];
 
 const soundData = [
@@ -311,17 +311,17 @@ const soundData = [
   { Icon: GiDiploma, size: 26, text: "Advanced Diploma" },
   { Icon: FaLocationDot, size: 20, text: "Abbey Road Institute, Amsterdam, Netherlands" },
   { Icon: FaCalendarCheck, size: 20, text: "2021 - 2023" },
-  { Icon: MdOutlineDescription, size: 20, link: "https://abbeyroadinstitute.nl/courses/part-time-diploma-music-production-sound-engineering/curriculum/" },
+  { Icon: MdOutlineDescription, size: 20, text: "Curriculum", link: "https://abbeyroadinstitute.nl/courses/part-time-diploma-music-production-sound-engineering/curriculum/" },
 ];
 
 
 const softwareText = (
   <code>
-    {softwareData.map(({ Icon, size, text, link, key }) => (
+    {softwareData.map(({ Icon, size, text, link }, index) => (
       <div className="flex flex-row p-2 items-center">
-        <Icon size={size} className='mr-8' key={key} />
-        {text}
-        <a href={link} target='_blank'>Curriculum</a>
+        <Icon size={size} className='mr-8' key={index} />
+        {index !== softwareData.length - 1 && text}
+        {index === softwareData.length - 1 && <a href={link} target='_blank' rel="noopener noreferrer">[Curriculum]</a>}
       </div>
     ))}
   </code>
@@ -329,10 +329,11 @@ const softwareText = (
 
 const soundText = (
   <code>
-    {soundData.map(({ Icon, size, text, key }) => (
+    {soundData.map(({ Icon, size, text, link }, index) => (
       <div className="flex flex-row p-2 items-center">
-        <Icon size={size} className='mr-8' key={key} />
-        {text}
+        <Icon size={size} className='mr-8' key={index} />
+        {index !== softwareData.length - 1 && text}
+        {index === softwareData.length - 1 && <a href={link} target='_blank' rel="noopener noreferrer">[Curriculum]</a>}
       </div>
     ))}
   </code>

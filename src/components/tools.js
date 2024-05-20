@@ -90,7 +90,7 @@ const Tools = ({ setShowTools }) => {
 const ToolSection = ({ section, setHoverTool, sectionType }) => {
     return (
         <div className="flex flex-row justify-between border-2 border-Gray rounded-lg shadow-md p-2 text-gray-500 my-4 items-center">
-            <div>
+            <div className="flex flex-wrap">
                 {section.map((tool) => <ToolIcon image={tool.image} alt={tool.alt} setHoverTool={setHoverTool} />)}
             </div>
             <div className="text-center flex flex-col m-4">
@@ -141,10 +141,10 @@ const backend = [
     { image: nodejs, alt: "Node.js" },
 ]
 const others = [
-    { image: unrealEngine, alt: "Unreal Engine" },
-    { image: unity, alt: "Unity" },
-    { image: wwise, alt: "Wwise" },
-    { image: fmod, alt: "FMOD" },
+    // { image: unrealEngine, alt: "Unreal Engine" },
+    // { image: unity, alt: "Unity" },
+    // { image: wwise, alt: "Wwise" },
+    // { image: fmod, alt: "FMOD" },
     { image: figma, alt: "Figma" },
     { image: copilot, alt: "Copilot" },
     { image: Android_Studio, alt: "Android Studio" },
