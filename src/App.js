@@ -63,6 +63,7 @@ function App() {
       setCompleted(true);
       // setShowContact(true);
     }
+    console.log("Current incremented: ", currentIndex);
   }, [currentIndex]);
 
   return (
@@ -97,31 +98,19 @@ const ContentBox = ({ setPlantImg, currentIndex, setCurrentIndex, academicPresse
   const [softwarePressed, setSoftwarePressed] = useState(false);
 
   useEffect(() => {
-    if (academicPressed) {
-      setPlantImg(plantImages[currentIndex]);
-      setCurrentIndex(currentIndex + 1);
-    }
+    setCurrentIndex(currentIndex + 1);
+    setPlantImg(plantImages[currentIndex]);
+    console.log("Academic pressed. plant grows");
   }, [academicPressed]);
-
-  const toggleSoftwarePressed = () => {
-    setSoftwarePressed(prevState => {
-      if (!prevState) {
-        setSoftwarePressed(true);
-      }
-    });
-  }
-
-  const toggleSoundPressed = () => {
-    setSoundPressed(prevState => {
-      if (!prevState) {
-        setSoundPressed(true);
-      }
-    });
-  }
 
   useEffect(() => {
     if (soundPressed && softwarePressed) setAcademicPressed(true);
   }, [softwarePressed, soundPressed]);
+
+  // const [pressed, setPressed] = useState({
+  //   softwareDeveloper: false,
+  //   soundEngineer: false
+  // })
 
   const handlePress = (name) => {
     setPressed(prevState => ({
@@ -140,10 +129,10 @@ const ContentBox = ({ setPlantImg, currentIndex, setCurrentIndex, academicPresse
               (softwarePressed ? "flex text-center bg-gradient-to-r from-Green to-Red via-Plat text-Black p-2 rounded-xl" :
                 "flex text-center bg-gradient-to-r from-Red to-Yellow via-Plat text-Black p-2 rounded-xl"))}>
             <div className='w-1/2'>
-              <button onClick={() => { handlePress('softwareDeveloper'); toggleSoftwarePressed() }} className={pressed.softwareDeveloper ? "text-Black font-bold p-1" : "text-gray-500 font-medium p-1"}>Software Developer</button>
+              <button onClick={() => { handlePress('softwareDeveloper'); setSoftwarePressed(true) }} className={pressed.softwareDeveloper ? "text-Black font-bold p-1" : "text-gray-500 font-medium p-1"}>Software Developer</button>
             </div>
             <div className='w-1/2'>
-              <button onClick={() => { handlePress('soundEngineer'); toggleSoundPressed() }} className={pressed.soundEngineer ? "text-Black font-bold p-1" : "text-gray-500 font-medium p-1"} >Sound Engineer</button>
+              <button onClick={() => { handlePress('soundEngineer'); setSoundPressed(true) }} className={pressed.soundEngineer ? "text-Black font-bold p-1" : "text-gray-500 font-medium p-1"} >Sound Engineer</button>
             </div>
           </div >
         </div>
@@ -203,14 +192,20 @@ const ContactButton = ({ setShowContact, setContactButtonPressed, contactHover }
 
 
 const ProjectsButton = ({ setPlantImg, currentIndex, setCurrentIndex, projectsButtonPressed, setProjectsButtonPressed, projectsHover, setShowProjects, isSmScreen }) => {
-  useEffect(() => {
-    setCurrentIndex(currentIndex + 1);
-    setPlantImg(plantImages[currentIndex]);
-  }, [projectsButtonPressed]);
+  const [completed, setCompleted] = useState(false);
+
+  const waterPlant = () => {
+    if (!completed) {
+      setCurrentIndex(currentIndex + 1);
+      setPlantImg(plantImages[currentIndex]);
+      console.log("project pressed. plant grows");
+      setCompleted(true);
+    }
+  };
 
   return (
     <div className='w-full flex justify-center'>
-      <button onClick={() => { setProjectsButtonPressed(true); setShowProjects(true) }}>
+      <button onClick={() => { setProjectsButtonPressed(true); setShowProjects(true); waterPlant() }}>
         <div className={projectsHover ? 'border-2 border-Black rounded-xl' : ''}>
           <div className="p-6 bg-white rounded-xl shadow-md flex items-center">
             {isSmScreen && <div className="flex-shrink-0">
@@ -236,14 +231,20 @@ const ProjectsButton = ({ setPlantImg, currentIndex, setCurrentIndex, projectsBu
 
 
 const ToolsButton = ({ setPlantImg, currentIndex, setCurrentIndex, setShowTools, toolsButtonPressed, setToolsButtonPressed, toolsHover, isSmScreen }) => {
-  useEffect(() => {
-    setCurrentIndex(currentIndex + 1);
-    setPlantImg(plantImages[currentIndex]);
-  }, [toolsButtonPressed]);
+  const [completed, setCompleted] = useState(false);
+
+  const waterPlant = () => {
+    if (!completed) {
+      setCurrentIndex(currentIndex + 1);
+      setPlantImg(plantImages[currentIndex]);
+      console.log("Tools pressed. plant grows");
+      setCompleted(true);
+    };
+  };
 
   return (
     <div className='w-full flex justify-center'>
-      <button onClick={() => { setToolsButtonPressed(true); setShowTools(true) }} className='float-right'>
+      <button onClick={() => { setToolsButtonPressed(true); setShowTools(true); waterPlant() }} className='float-right'>
         <div className={toolsHover ? 'border-2 border-Black rounded-xl' : ''}>
           <div className="p-6 bg-white rounded-xl shadow-md flex items-center">
             {isSmScreen && <div className="flex-shrink-0">
@@ -277,15 +278,6 @@ const Plant = ({ plantImg }) => {
 };
 
 
-const links = [
-  { text: "Linkedin", icon: <CiLinkedin size={30} />, link: "https://www.linkedin.com/in/jaime360/" },
-  { text: "GitHub", icon: <FaGithub size={25} />, link: "https://github.com/JaimeAlonsoGA" },
-  { text: "Email", icon: <MdOutlineEmail size={25} />, link: "mailto:alonsog.jaime@gmail.com" },
-  { text: "Resume", icon: <GrDocumentPdf size={23} />, link: "https://drive.google.com/file/d/1rc6TNp92qo8FIlQ6-1cn_Zt6SgQQ0T5L/view?usp=sharing" },
-  { text: "Soundcloud", icon: <RiSoundcloudLine size={25} />, link: "https://soundcloud.com/jaime-alonso-360" },
-  { text: "Itch.io", icon: <FaItchIo size={23} />, link: "https://jaime-alonso.itch.io/" },
-];
-
 const LinksBanner = ({ completed, isMdScreen, isLgScreen }) => {
   return (
     <Marquee velocity={5} autoFill={true} gradient={true} gradientColor={completed ? 'Green' : 'Red'} gradientWidth={isMdScreen ? 200 : (isLgScreen ? 250 : 100)}>
@@ -304,8 +296,7 @@ const Links = ({ text, icon, link, completed }) => {
       <p className='text-gray-500'>{text}</p>
     </div>
   );
-}
-
+};
 
 
 const softwareData = [
@@ -324,11 +315,12 @@ const soundData = [
   { Icon: MdOutlineDescription, size: 20, text: "[CARTA RECOMENDACIÓN]" },
 ];
 
+
 const softwareText = (
   <code>
-    {softwareData.map(({ Icon, size, text }) => (
+    {softwareData.map(({ Icon, size, text, key }) => (
       <div className="flex flex-row p-2">
-        <Icon size={size} className='mr-8' />
+        <Icon size={size} className='mr-8' key={key} />
         {text}
       </div>
     ))}
@@ -337,14 +329,24 @@ const softwareText = (
 
 const soundText = (
   <code>
-    {soundData.map(({ Icon, size, text }) => (
+    {soundData.map(({ Icon, size, text, key }) => (
       <div className="flex flex-row p-2">
-        <Icon size={size} className='mr-8' />
+        <Icon size={size} className='mr-8' key={key} />
         {text}
       </div>
     ))}
   </code>
 );
+
+
+const links = [
+  { text: "Linkedin", icon: <CiLinkedin size={30} />, link: "https://www.linkedin.com/in/jaime360/" },
+  { text: "GitHub", icon: <FaGithub size={25} />, link: "https://github.com/JaimeAlonsoGA" },
+  { text: "Email", icon: <MdOutlineEmail size={25} />, link: "mailto:alonsog.jaime@gmail.com" },
+  { text: "Resume", icon: <GrDocumentPdf size={23} />, link: "https://drive.google.com/file/d/1rc6TNp92qo8FIlQ6-1cn_Zt6SgQQ0T5L/view?usp=sharing" },
+  { text: "Soundcloud", icon: <RiSoundcloudLine size={25} />, link: "https://soundcloud.com/jaime-alonso-360" },
+  { text: "Itch.io", icon: <FaItchIo size={23} />, link: "https://jaime-alonso.itch.io/" },
+];
 
 
 export default App;

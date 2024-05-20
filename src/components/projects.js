@@ -52,14 +52,6 @@ const Projects = ({ setShowProjects }) => {
 
     const isLgScreen = useMediaQuery({ query: '(min-width: 1024px)' });
 
-    // useEffect(() => {
-    //     console.log(selectedProjects);
-    // }, [selectedProjects]);
-
-    useEffect(() => {
-        console.log(isLgScreen);
-    }, []);
-
     return (
         <>
             <div className="fixed inset-0 flex items-center justify-center z-50 h-screen">
@@ -219,7 +211,7 @@ const ProjectsRow = ({ setHoverProject, selectedProjects }) => {
             <div className="flex flex-row justify-center items-center">
                 {/* <p className="text-center text-gray-500">External</p> */}
                 {/* <FaItchIo color="gray" className="mx-2" /> */}
-                <FaExternalLinkAlt size={15} color="black" className="mr-2" />
+                <FaExternalLinkAlt size={18} color="black" className="mr-2" />
                 {/* <FaGithub color="gray" className="mr-2" /> */}
                 {/* <p className="text-center text-gray-500">Links</p> */}
 
@@ -236,7 +228,7 @@ const ProjectInfoRow = ({ image, alt, link, setHoverProject }) => {
         <div className="p-0.5 opacity-40 hover:opacity-100"
             onMouseEnter={() => setHoverProject(alt)}
             onMouseLeave={() => setHoverProject(placeholderProjects)}>
-            <div className="bg-Plat text-Plat rounded-lg">
+            <div className="bg-Plat text-Plat rounded-lg mx-2">
                 <a href={link} target="_blank">
                     <img src={image} alt={alt} className="rounded-lg w-24" />
                 </a>
