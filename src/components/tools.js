@@ -45,7 +45,7 @@ import cubase from '../assets/icons/cubase.png';
 
 
 const Tools = ({ setShowTools }) => {
-    const [hoverTool, setHoverTool] = useState('My eveyday tools!');
+    const [hoverTool, setHoverTool] = useState('My everyday tools!');
 
     // const props = useSpring({
     //     backgroundColor: hoverTool ? 'linear-gradient(to right, red, yellow)' : 'white',
