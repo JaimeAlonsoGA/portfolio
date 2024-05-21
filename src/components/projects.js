@@ -43,6 +43,7 @@ import fmod from '../assets/icons/fmod.png';
 import cubase from '../assets/icons/cubase.png';
 import figma from '../assets/icons/figma.png';
 import firebase from '../assets/icons/Firebase.png';
+import mysql from '../assets/icons/MySQL.png';
 
 const placeholderProjects = "...";
 
@@ -314,7 +315,7 @@ const HeaderIcon = ({ icon, setHoverProject, text, setFilterPressed, onSelect, i
 const projects = [
     { id: 1, title: "Alchimix", image: alchimixIcon, alt: "Cocktail recipe book for Android and IOS", group: "Solo", platform: "App", link: "https://github.com/JaimeAlonsoGA/alchimix", rol: ["Fullstack Developer"], maintech: reactNative, sidetech: [figma] },
     { id: 8, title: "Jaime 360", image: portfolio, alt: "This website!", group: "Solo", platform: "Website", link: "https://github.com/JaimeAlonsoGA/portfolio", rol: ["Fullstack Developer"], maintech: react, sidetech: [tailwindCSS, figma, firebase] },
-    { id: 3, title: "Once Upon A Time", image: erase, alt: "Social storytelling game for Android and IOS", group: "Solo", platform: "App", link: "https://github.com/JaimeAlonsoGA/erase-una-vez", rol: ["Fullstack Developer"], maintech: reactNative, sidetech: [figma] },
+    { id: 3, title: "Once Upon A Time", image: erase, alt: "Social storytelling game for Android and IOS", group: "Solo", platform: "App", link: "https://github.com/JaimeAlonsoGA/erase-una-vez", rol: ["Fullstack Developer"], maintech: reactNative, sidetech: [mysql, figma] },
     { id: 12, title: "Unreal Engine Demo Level", image: unreal, alt: "Level design and game mechanics demo for Unreal Engine", group: "Solo", platform: "Game", link: "https://youtu.be/uMCGGwNkLDA?si=FRIiVkmciwvWmhbn", rol: ["Fullstack Developer"], maintech: unrealEngine, sidetech: [cubase] },
     { id: 11, title: "TimeKeeper", image: time, alt: "Video game with procedural level generation and high score", group: "Group", platform: "Game", link: "https://threeraccoonsgames.itch.io/timekeeper", rol: ["Project manager", "Game designer"], maintech: unity, sidetech: [] },
     { id: 2, title: "The Visu Exam", image: biovisu, alt: "Specie identification tool for Android and IOS", group: "Solo", platform: "App", link: "https://github.com/JaimeAlonsoGA/bio-visu", rol: ["Fullstack Developer"], maintech: reactNative, sidetech: [figma] },

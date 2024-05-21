@@ -344,7 +344,7 @@ const links = [
   { text: "Linkedin", icon: <CiLinkedin size={30} />, link: "https://www.linkedin.com/in/jaime360/" },
   { text: "GitHub", icon: <FaGithub size={25} />, link: "https://github.com/JaimeAlonsoGA" },
   { text: "Email", icon: <MdOutlineEmail size={25} />, link: "mailto:alonsog.jaime@gmail.com" },
-  { text: "Resume", icon: <GrDocumentPdf size={23} />, link: "https://drive.google.com/file/d/1rc6TNp92qo8FIlQ6-1cn_Zt6SgQQ0T5L/view?usp=sharing" },
+  { text: "Resume", icon: <GrDocumentPdf size={23} />, link: "https://drive.google.com/file/d/1vj8f4ZcjUwJ19b8SPbCy4GEeoqjszEfv/view?usp=sharing" },
   { text: "Soundcloud", icon: <RiSoundcloudLine size={25} />, link: "https://soundcloud.com/jaimebigsound" },
   { text: "Itch.io", icon: <FaItchIo size={23} />, link: "https://jaime-alonso.itch.io/" },
 ];
