@@ -84,7 +84,7 @@ function App() {
         <ToolsButton setPlantImg={setPlantImg} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} setShowTools={setShowTools} toolsButtonPressed={toolsButtonPressed} setToolsButtonPressed={setToolsButtonPressed} toolsHover={toolsHover} isSmScreen={isSmScreen} />
       </div>}
       {(!pressed.softwareDeveloper && !pressed.soundEngineer) && <Plant plantImg={plantImg} />}
-      <div className='w-full absolute bottom-0'>
+      <div className='w-full absolute bottom-0 bg-Background'>
         <LinksBanner completed={completed} isMdScreen={isMdScreen} isLgScreen={isLgScreen} />
       </div>
     </div>
@@ -191,14 +191,12 @@ const ContactButton = ({ setShowContact, setContactButtonPressed, contactHover }
 
 
 const ProjectsButton = ({ setPlantImg, currentIndex, setCurrentIndex, projectsButtonPressed, setProjectsButtonPressed, projectsHover, setShowProjects, isSmScreen }) => {
-  const [completed, setCompleted] = useState(false);
 
   const waterPlant = () => {
-    if (!completed) {
+    if (!projectsButtonPressed) {
       setCurrentIndex(currentIndex + 1);
       setPlantImg(plantImages[currentIndex]);
       console.log("project pressed. plant grows");
-      setCompleted(true);
     }
   };
 
@@ -230,14 +228,12 @@ const ProjectsButton = ({ setPlantImg, currentIndex, setCurrentIndex, projectsBu
 
 
 const ToolsButton = ({ setPlantImg, currentIndex, setCurrentIndex, setShowTools, toolsButtonPressed, setToolsButtonPressed, toolsHover, isSmScreen }) => {
-  const [completed, setCompleted] = useState(false);
 
   const waterPlant = () => {
-    if (!completed) {
+    if (!toolsButtonPressed) {
       setCurrentIndex(currentIndex + 1);
       setPlantImg(plantImages[currentIndex]);
       console.log("Tools pressed. plant grows");
-      setCompleted(true);
     };
   };
 
