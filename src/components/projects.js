@@ -253,12 +253,7 @@ const ProjectsRow = ({ setHoverProject, filterPressed, selectedFilter }) => {
     return (
         <div>
             <div className="flex flex-row justify-center items-center">
-                {/* <p className="text-center text-gray-500">External</p> */}
-                {/* <FaItchIo color="gray" className="mx-2" /> */}
                 <FaExternalLinkAlt size={18} color="black" className="mr-2" />
-                {/* <FaGithub color="gray" className="mr-2" /> */}
-                {/* <p className="text-center text-gray-500">Links</p> */}
-
             </div>
             <div className="flex flex-row p-2 text-gray-500 my-2 items-center justify-center border rounded-xl">
                 {projects.map((project) => (

@@ -19,7 +19,7 @@ import { RiSoundcloudLine } from "react-icons/ri";
 import { FaLock } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
 import { FaUnlock } from "react-icons/fa";
-
+  
 import p7 from './assets/images/p7.png';
 import p6 from './assets/images/p6.png';
 import p5 from './assets/images/p5.png';
@@ -286,8 +286,8 @@ const LinksBanner = ({ completed, isMdScreen, isLgScreen }) => {
 const Links = ({ text, icon, link, completed }) => {
   return (
     <div className='flex items-center flex-col mx-14 sm:mx-16 lg:mx-20'>
-      <a href={link} target="_blank" rel="noreferrer" className={completed ? "text-Plat bg-LightGreen w-18 h-18 p-2 inline-block hover:bg-Green" :
-        "text-Plat bg-LightRed w-18 h-18 p-2 inline-block hover:bg-Red"}>{icon}</a>
+      <a href={link} target="_blank" rel="noreferrer" className={completed ? "text-Plat bg-LightGreen w-18 h-18 p-2 inline-block hover:bg-Green rounded-xl" :
+        "text-Plat bg-LightRed w-18 h-18 p-2 inline-block hover:bg-Red rounded-xl"}>{icon}</a>
       <p className='text-gray-500'>{text}</p>
     </div>
   );
