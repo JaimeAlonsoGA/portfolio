@@ -30,6 +30,7 @@ import reclaim from '../assets/projects/reclaim.png';
 import sucked from '../assets/projects/sucked.png';
 import time from '../assets/projects/time.png';
 import unreal from '../assets/projects/unreal.png';
+import vivilife from '../assets/projects/vivilife.jpg';
 import Marquee from "react-fast-marquee";
 
 
@@ -53,7 +54,7 @@ const Projects = ({ setShowProjects }) => {
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [filterPressed, setFilterPressed] = useState({
         solo: false,
-        group: false,
+        team: false,
         game: false,
         app: false,
         website: false,
@@ -153,7 +154,7 @@ const ProjectInfoMarquee = ({ setHoverProject, image, alt, title, group, platfor
                         </div>
                         {isHovering &&
                             <div className="flex flex-row">
-                                {group === "Alone" ? <MdPerson size={20} color="black" className="mr-2" /> : <RiTeamFill size={20} color="black" className="mr-2" />}
+                                {group === "Solo" ? <MdPerson size={20} color="black" className="mr-2" /> : <RiTeamFill size={20} color="black" className="mr-2" />}
                                 {platform === "Game" ? <IoGameController size={20} color="black" /> : platform === "App" ? <IoPhonePortraitOutline size={20} color="black" /> : <GrPersonalComputer size={20} color="black" />}
                             </div>
                         }
@@ -196,7 +197,7 @@ const MobileProjectInfoMarquee = ({ setHoverProject, image, alt, title, group, p
                     </div>
                     {isHovering &&
                         <div className="flex flex-row">
-                            {group === "Alone" ? <MdPerson size={20} color="black" className="mr-2" /> : <RiTeamFill size={20} color="black" className="mr-2" />}
+                            {group === "Solo" ? <MdPerson size={20} color="black" className="mr-2" /> : <RiTeamFill size={20} color="black" className="mr-2" />}
                             {platform === "Game" ? <IoGameController size={20} color="black" /> : platform === "App" ? <IoPhonePortraitOutline size={20} color="black" /> : <GrPersonalComputer size={20} color="black" />}
                         </div>
                     }
@@ -230,13 +231,13 @@ const MobileProjectInfoMarquee = ({ setHoverProject, image, alt, title, group, p
 
 const ProjectsRow = ({ setHoverProject, filterPressed, selectedFilter }) => {
     const isFilterMatch = (group, platform) => {
-        if (selectedFilter === "solo" || selectedFilter === "group") {
+        if (selectedFilter === "solo" || selectedFilter === "team") {
             if (group === "Solo") {
                 return filterPressed.solo;
             }
-            else if (group === "Group") {
-                return filterPressed.group;
-            }
+            else if (group === "Team") {
+                return filterPressed.team;
+            }   
         }
         if (selectedFilter === "game" || selectedFilter === "app" || selectedFilter === "website") {
             if (platform === "Game") {
@@ -285,7 +286,7 @@ const HeaderIcon = ({ icon, setHoverProject, text, setFilterPressed, onSelect, i
     const handlePress = (name) => {
         setFilterPressed(prevState => ({
             solo: false,
-            group: false,
+            team: false,
             game: false,
             app: false,
             website: false,
@@ -308,23 +309,24 @@ const HeaderIcon = ({ icon, setHoverProject, text, setFilterPressed, onSelect, i
 
 //id, title, image, alt, group, platform, link, rol, maintech, sidetech
 const projects = [
-    { id: 1, title: "Alchimix", image: alchimixIcon, alt: "Cocktail recipe book for Android and IOS", group: "Solo", platform: "App", link: "https://github.com/JaimeAlonsoGA/alchimix", rol: ["Fullstack Developer"], maintech: reactNative, sidetech: [figma] },
-    { id: 8, title: "Jaime 360", image: portfolio, alt: "This website!", group: "Solo", platform: "Website", link: "https://github.com/JaimeAlonsoGA/portfolio", rol: ["Fullstack Developer"], maintech: react, sidetech: [tailwindCSS, figma, firebase] },
     { id: 3, title: "Once Upon A Time", image: erase, alt: "Social storytelling game for Android and IOS", group: "Solo", platform: "App", link: "https://github.com/JaimeAlonsoGA/erase-una-vez", rol: ["Fullstack Developer"], maintech: reactNative, sidetech: [mysql, figma] },
+    { id: 8, title: "Jaime 360", image: portfolio, alt: "This website!", group: "Solo", platform: "Website", link: "https://github.com/JaimeAlonsoGA/portfolio", rol: ["Fullstack Developer"], maintech: react, sidetech: [tailwindCSS, figma, firebase] },
     { id: 12, title: "Unreal Engine Demo Level", image: unreal, alt: "Level design and game mechanics demo for Unreal Engine", group: "Solo", platform: "Game", link: "https://youtu.be/uMCGGwNkLDA?si=FRIiVkmciwvWmhbn", rol: ["Fullstack Developer"], maintech: unrealEngine, sidetech: [cubase] },
-    { id: 11, title: "TimeKeeper", image: time, alt: "Video game with procedural level generation and high score", group: "Group", platform: "Game", link: "https://threeraccoonsgames.itch.io/timekeeper", rol: ["Project manager", "Game designer"], maintech: unity, sidetech: [] },
+    { id: 1, title: "Alchimix", image: alchimixIcon, alt: "Cocktail recipe book for Android and IOS", group: "Solo", platform: "App", link: "https://github.com/JaimeAlonsoGA/alchimix", rol: ["Fullstack Developer"], maintech: reactNative, sidetech: [figma] },
+    { id: 13, title: "ViviLife Website", image: vivilife, alt: "ViviLife's app website", group: "Team", platform: "Website", link: "https://vivilife-web.web.app/", rol: ["Frontend Developer"], maintech: react, sidetech: [tailwindCSS, figma, firebase] },
+    { id: 11, title: "TimeKeeper", image: time, alt: "Video game with procedural level generation and high score", group: "Team", platform: "Game", link: "https://threeraccoonsgames.itch.io/timekeeper", rol: ["Project manager", "Game designer"], maintech: unity, sidetech: [] },
     { id: 2, title: "The Visu Exam", image: biovisu, alt: "Specie identification tool for Android and IOS", group: "Solo", platform: "App", link: "https://github.com/JaimeAlonsoGA/bio-visu", rol: ["Fullstack Developer"], maintech: reactNative, sidetech: [figma] },
-    { id: 9, title: "Reclaim the Surface", image: reclaim, alt: "Video game with levels, enemies and a final boss fight", group: "Group", platform: "Game", link: "https://rubikow.itch.io/reclaim-the-surface", rol: ["Sound Designer", "Audio implementation"], maintech: unity, sidetech: [fmod, cubase] },
-    { id: 6, title: "The Gift Of Fire", image: gift, alt: "Video game based on the dungeon crawler concept", group: "Group", platform: "Game", link: "https://mkimball.itch.io/gift-of-fire", rol: ["Sound Designer", "Audio implementation"], maintech: wwise, sidetech: [cubase] },
-    { id: 4, title: "SmartGas", image: gas, alt: "Your car gas consumption statistics for Android and IOS", group: "Group", platform: "App", link: "https://github.com/JaimeAlonsoGA/smartgas", rol: ["Developer"], maintech: reactNative, sidetech: [tailwindCSS] },
-    { id: 10, title: "Sucked Souls", image: sucked, alt: "Video game in which you kill zombies", group: "Group", platform: "Game", link: "https://thekaoser.itch.io/suck-souls", rol: ["Sound Designer"], maintech: cubase, sidetech: [] }, //cubase
-    { id: 5, title: "Get'em", image: getem, alt: "Video game with levels, local multiplayer and dynamic audio", group: "Group", platform: "Game", link: "https://globalgamejam.org/games/2024/get-it-them-2", rol: ["Sound Designer", "Audio implementation"], maintech: unity, sidetech: [fmod, cubase] },
+    { id: 9, title: "Reclaim the Surface", image: reclaim, alt: "Video game with levels, enemies and a final boss fight", group: "Team", platform: "Game", link: "https://rubikow.itch.io/reclaim-the-surface", rol: ["Sound Designer", "Audio implementation"], maintech: unity, sidetech: [fmod, cubase] },
+    { id: 6, title: "The Gift Of Fire", image: gift, alt: "Video game based on the dungeon crawler concept", group: "Team", platform: "Game", link: "https://mkimball.itch.io/gift-of-fire", rol: ["Sound Designer", "Audio implementation"], maintech: wwise, sidetech: [cubase] },
+    { id: 4, title: "SmartGas", image: gas, alt: "Your car gas consumption statistics for Android and IOS", group: "Team", platform: "App", link: "https://github.com/JaimeAlonsoGA/smartgas", rol: ["Developer"], maintech: reactNative, sidetech: [tailwindCSS] },
+    { id: 10, title: "Sucked Souls", image: sucked, alt: "Video game in which you kill zombies", group: "Team", platform: "Game", link: "https://thekaoser.itch.io/suck-souls", rol: ["Sound Designer"], maintech: cubase, sidetech: [] },
+    { id: 5, title: "Get'em", image: getem, alt: "Video game with levels, local multiplayer and dynamic audio", group: "Team", platform: "Game", link: "https://globalgamejam.org/games/2024/get-it-them-2", rol: ["Sound Designer", "Audio implementation"], maintech: unity, sidetech: [fmod, cubase] },
     { id: 7, title: "Walking the Goblin", image: goblin, alt: "Video game made to satisfy the ambitions of beign a goblin", group: "Solo", platform: "Game", link: "https://github.com/JaimeAlonsoGA/walking-the-goblin", rol: ["Fullstack Developer"], maintech: unity, sidetech: [fmod, cubase] },
 ]
 
 const filterButtons = [
     { icon: <MdPerson />, text: "solo", selectText: "Solo" },
-    { icon: <RiTeamFill />, text: "group", selectText: "Group" },
+    { icon: <RiTeamFill />, text: "team", selectText: "Team" },
     { icon: <IoGameController />, text: "game", selectText: "Video Game" },
     { icon: <IoPhonePortraitOutline />, text: "app", selectText: "App" },
     { icon: <GrPersonalComputer />, text: "website", selectText: "Website" }
