@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.77c83dda.css",
-    "main.js": "/static/js/main.0fb0a35d.js",
+    "main.css": "/static/css/main.178e6438.css",
+    "main.js": "/static/js/main.de9bd732.js",
     "static/js/453.ace21015.chunk.js": "/static/js/453.ace21015.chunk.js",
     "static/media/gift.png": "/static/media/gift.0908097ff1980b05a196.png",
     "static/media/alchimixIcon.png": "/static/media/alchimixIcon.c866d3c3b15fcda4d495.png",
@@ -10,6 +10,7 @@
     "static/media/unreal.png": "/static/media/unreal.95bcce73bfe9c778412d.png",
     "static/media/sucked.png": "/static/media/sucked.274fa03094c5d9c8ea36.png",
     "static/media/react-native.png": "/static/media/react-native.eaf89a6c71c24579560c.png",
+    "static/media/vivilife.jpg": "/static/media/vivilife.ae4bf3e0fecefbd6e72e.jpg",
     "static/media/time.png": "/static/media/time.f389beb0f5e965ad7762.png",
     "static/media/expo.png": "/static/media/expo.465a4029f35d188f97cf.png",
     "static/media/p7.png": "/static/media/p7.d56ae31d569ec4fd7042.png",
@@ -41,12 +42,12 @@
     "static/media/Unity.png": "/static/media/Unity.3bfc3216d2afbeb578bd.png",
     "static/media/Kubernetes.png": "/static/media/Kubernetes.79f5acd191c9ebc0ac9e.png",
     "index.html": "/index.html",
-    "main.77c83dda.css.map": "/static/css/main.77c83dda.css.map",
-    "main.0fb0a35d.js.map": "/static/js/main.0fb0a35d.js.map",
+    "main.178e6438.css.map": "/static/css/main.178e6438.css.map",
+    "main.de9bd732.js.map": "/static/js/main.de9bd732.js.map",
     "453.ace21015.chunk.js.map": "/static/js/453.ace21015.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.77c83dda.css",
-    "static/js/main.0fb0a35d.js"
+    "static/css/main.178e6438.css",
+    "static/js/main.de9bd732.js"
   ]
 }
