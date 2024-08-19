@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.178e6438.css",
-    "main.js": "/static/js/main.4da18827.js",
+    "main.js": "/static/js/main.96225c08.js",
     "static/js/453.ace21015.chunk.js": "/static/js/453.ace21015.chunk.js",
     "static/media/gift.png": "/static/media/gift.0908097ff1980b05a196.png",
     "static/media/alchimixIcon.png": "/static/media/alchimixIcon.c866d3c3b15fcda4d495.png",
@@ -20,6 +20,7 @@
     "static/media/biovisu.jpg": "/static/media/biovisu.013734a73047209065b1.jpg",
     "static/media/p5.png": "/static/media/p5.68c3dd9b43394285b7ee.png",
     "static/media/goblin.jpg": "/static/media/goblin.84778972fb2330157636.jpg",
+    "static/media/boskestudio.webp": "/static/media/boskestudio.24efcefbcd876f442144.webp",
     "static/media/portfolio.png": "/static/media/portfolio.01925e41a280451fb992.png",
     "static/media/getem.jpg": "/static/media/getem.809e99ec48976d5f6f81.jpg",
     "static/media/p4.png": "/static/media/p4.0f83e8f6aea3de213bba.png",
@@ -43,11 +44,11 @@
     "static/media/Kubernetes.png": "/static/media/Kubernetes.79f5acd191c9ebc0ac9e.png",
     "index.html": "/index.html",
     "main.178e6438.css.map": "/static/css/main.178e6438.css.map",
-    "main.4da18827.js.map": "/static/js/main.4da18827.js.map",
+    "main.96225c08.js.map": "/static/js/main.96225c08.js.map",
     "453.ace21015.chunk.js.map": "/static/js/453.ace21015.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.178e6438.css",
-    "static/js/main.4da18827.js"
+    "static/js/main.96225c08.js"
   ]
 }
